@@ -1,0 +1,123 @@
+<ion-content class="perfil-content">
+  
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Mi Perfil</h2>
+    </div>
+  </header>
+
+  <button class="back-btn" (click)="volver()" title="Volver">
+    <img src="assets/icon/volver.png" alt="Volver">
+  </button>
+
+  <div class="perfil-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Perfil</span>
+    </h1>
+  </div>
+
+  <div *ngIf="cargando" class="loading-container">
+    <p>Cargando información del perfil...</p>
+  </div>
+
+  <div *ngIf="!cargando" class="perfil-container">
+    
+    <ion-card class="info-card">
+      <ion-card-header>
+        <ion-card-title>Información Personal</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="info-item">
+          <span class="info-label">Nombre:</span>
+          <span class="info-value" *ngIf="!editando">{{ usuario.nombre || '-' }}</span>
+          <ion-input id="perfil-nombre" *ngIf="editando" [(ngModel)]="usuarioEdit.nombre" type="text" placeholder="Nombre"></ion-input>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{ usuario.email || '-' }}</span>
+          <span class="info-hint" *ngIf="editando">El email no se puede cambiar</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Teléfono:</span>
+          <span class="info-value" *ngIf="!editando">{{ usuario.telefono || 'No registrado' }}</span>
+          <ion-input id="perfil-telefono" *ngIf="editando" [(ngModel)]="usuarioEdit.telefono" type="tel" placeholder="Teléfono"></ion-input>
+        </div>
+        <div class="info-item" *ngIf="!editando && (usuario.ciudad || usuario.pais)">
+          <span class="info-label">Ubicación:</span>
+          <span class="info-value">
+            <span *ngIf="usuario.ciudad">{{ usuario.ciudad }}</span>
+            <span *ngIf="usuario.ciudad && usuario.pais">, </span>
+            <span *ngIf="usuario.pais">{{ usuario.pais }}</span>
+          </span>
+        </div>
+        <div class="info-item" *ngIf="editando">
+          <span class="info-label">Ciudad:</span>
+          <ion-input id="perfil-ciudad" [(ngModel)]="usuarioEdit.ciudad" type="text" placeholder="Ciudad"></ion-input>
+        </div>
+        <div class="info-item" *ngIf="editando">
+          <span class="info-label">País:</span>
+          <ion-input id="perfil-pais" [(ngModel)]="usuarioEdit.pais" type="text" placeholder="País"></ion-input>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stats-card">
+      <ion-card-header>
+        <ion-card-title>Estadísticas</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">{{ cantidadMascotas }}</div>
+            <div class="stat-label">Mascotas registradas</div>
+          </div>
+          <div class="stat-item" *ngIf="vacunasProximas > 0">
+            <div class="stat-value stat-warning">{{ vacunasProximas }}</div>
+            <div class="stat-label">Vacunas próximas</div>
+          </div>
+          <div class="stat-item" *ngIf="vacunasVencidas > 0">
+            <div class="stat-value stat-danger">{{ vacunasVencidas }}</div>
+            <div class="stat-label">Vacunas vencidas</div>
+          </div>
+        </div>
+        
+        <div class="especies-section" *ngIf="especiesArray.length > 0">
+          <h4 class="especies-title">Mascotas por especie:</h4>
+          <div class="especies-list">
+            <div class="especie-item" *ngFor="let especie of especiesArray">
+              <span class="especie-name">{{ especie.nombre }}</span>
+              <span class="especie-count">{{ especie.cantidad }}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="acciones-card">
+      <ion-card-header>
+        <ion-card-title>Acciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="!editando">
+          <ion-button expand="block" color="primary" (click)="activarEdicion()" class="ion-margin-bottom">
+            Editar Información
+          </ion-button>
+          <ion-button expand="block" color="danger" (click)="eliminarCuenta()">
+            Eliminar Cuenta
+          </ion-button>
+        </div>
+        <div *ngIf="editando" class="edit-buttons">
+          <ion-button expand="block" color="success" (click)="guardarEdicion()" class="ion-margin-bottom">
+            Guardar Cambios
+          </ion-button>
+          <ion-button expand="block" fill="outline" (click)="cancelarEdicion()">
+            Cancelar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>

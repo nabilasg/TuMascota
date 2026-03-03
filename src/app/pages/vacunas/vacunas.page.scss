@@ -1,0 +1,116 @@
+@import '../login/login.page.scss';
+
+.vacunas-content {
+  @extend .login-content;
+  padding: 20px;
+  padding-top: 120px;
+}
+
+.top-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: calc(env(safe-area-inset-top) + 10px) 20px 10px 20px;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .header-icon { width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: #fff; padding: 5px; }
+    .header-title { margin: 0; font-size: 28px; font-weight: 600; color: #f59e0b; font-family: 'Pacifico', 'Lobster', cursive; }
+  }
+}
+
+.back-btn {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 20px); right: 20px;
+  z-index: 1000;
+  width: 45px; height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  img { width: 24px; height: 24px; object-fit: contain; }
+  &:hover { transform: scale(1.1); }
+  &:active { transform: scale(0.95); }
+}
+
+.vacunas-header { @extend .login-header; margin-top: 100px; margin-bottom: 30px; }
+
+.button-container { width: 100%; max-width: 400px; margin: 0 auto 30px; display: flex; justify-content: center; }
+
+.add-btn {
+  --background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --border-radius: 12px;
+  height: 50px; font-weight: 600; font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+  width: 100%;
+}
+
+.no-vacunas-box {
+  text-align: center; padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px; max-width: 400px;
+  margin: 20px auto 0;
+  display: flex; flex-direction: column; align-items: center;
+
+  h2 { margin-top: 15px; font-size: 22px; font-weight: 600; color: #fff; }
+  p { color: rgba(255, 255, 255, 0.9); margin-top: 10px; font-size: 14px; }
+}
+
+.no-vacunas-icon { width: 120px; height: 120px; opacity: 0.9; }
+
+.lista-vacunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px; max-width: 1200px;
+  margin: 0 auto; padding: 0 10px; width: 100%;
+}
+
+.card-vacuna {
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  overflow: hidden; cursor: pointer;
+
+  &:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); }
+}
+
+ion-card-content {
+  padding: 20px;
+  h2 { margin: 0 0 15px 0; font-size: 22px; font-weight: 600; color: #333; }
+  p {
+    color: #666; margin: 8px 0; font-size: 14px;
+    strong { color: #f59e0b; font-weight: 600; }
+  }
+}
+
+@media (max-width: 576px) {
+  .vacunas-content { padding-top: 100px; }
+  .top-header { padding: calc(env(safe-area-inset-top) + 8px) 15px 8px 15px;
+    .header-content { gap: 10px;
+      .header-icon { width: 65px; height: 65px; }
+      .header-title { font-size: 22px; }
+    }
+  }
+  .back-btn { top: calc(env(safe-area-inset-top) + 15px); right: 15px; width: 40px; height: 40px;
+    img { width: 20px; height: 20px; }
+  }
+  .vacunas-header { margin-top: 80px; margin-bottom: 20px; }
+  .button-container { margin-bottom: 20px; }
+  .add-btn { height: 48px; font-size: 1rem; }
+  .lista-vacunas { grid-template-columns: 1fr; gap: 15px; padding: 0 5px; }
+  .no-vacunas-box { padding: 25px 15px; h2 { font-size: 20px; } }
+  .no-vacunas-icon { width: 100px; height: 100px; }
+}

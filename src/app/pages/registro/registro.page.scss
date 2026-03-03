@@ -1,0 +1,21 @@
+@import '../login/login.page.scss';
+
+.register-content {
+  @extend .login-content;
+}
+
+.register-header {
+  @extend .login-header;
+}
+
+.register-card {
+  @extend .login-card;
+}
+
+.register-button-main {
+  @extend .login-button;
+}
+
+.login-return {
+  @extend .register-button;
+}

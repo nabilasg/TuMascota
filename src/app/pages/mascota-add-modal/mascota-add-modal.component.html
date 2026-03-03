@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Añadir Mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input id="mascota-add-nombre" [(ngModel)]="nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Especie</ion-label>
+    <select
+      class="native-select"
+      [(ngModel)]="especieSeleccionada"
+      (change)="onEspecieChange()"
+    >
+      <option [ngValue]="''" disabled>Selecciona especie</option>
+      <option *ngFor="let e of speciesOptions" [value]="e">{{ e }}</option>
+    </select>
+  </ion-item>
+
+  <ion-item *ngIf="especieSeleccionada === 'Otro'">
+    <ion-label position="floating">Escribe la especie...</ion-label>
+    <ion-input id="mascota-add-especie-otra" [(ngModel)]="especieOtra"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="razasDisponibles.length > 0 && especieSeleccionada && especieSeleccionada !== 'Otro'">
+    <ion-label position="floating">Raza</ion-label>
+    <select
+      class="native-select"
+      [(ngModel)]="razaSeleccionada"
+    >
+      <option [ngValue]="''" disabled>Selecciona raza</option>
+      <option *ngFor="let r of razasDisponibles" [value]="r">{{ r }}</option>
+      <option value="Otra">Otra</option>
+    </select>
+  </ion-item>
+
+  <ion-item *ngIf="razaSeleccionada === 'Otra' || !especieSeleccionada || especieSeleccionada === 'Otro' || razasDisponibles.length === 0">
+    <ion-label position="floating">Raza</ion-label>
+    <ion-input id="mascota-add-raza" [(ngModel)]="razaOtra"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha nacimiento</ion-label>
+    <ion-input id="mascota-add-fecha" type="date" [max]="fechaMax" [(ngModel)]="fechaNacimiento"></ion-input>
+  </ion-item>
+
+  <div class="file-input-wrapper">
+    <ion-item>
+      <ion-label position="stacked">Foto de la mascota</ion-label>
+      <input id="mascota-add-foto" type="file" (change)="seleccionarFoto($event)" accept="image/*">
+    </ion-item>
+    <p class="file-hint">Selecciona una imagen para la foto de tu mascota</p>
+  </div>
+
+  <div class="button-box">
+    <ion-button expand="full" class="save-btn" (click)="guardar()" [disabled]="guardando">
+      {{ guardando ? 'Guardando...' : 'Guardar Mascota' }}
+    </ion-button>
+  </div>
+
+</ion-content>

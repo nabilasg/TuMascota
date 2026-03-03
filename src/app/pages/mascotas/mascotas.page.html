@@ -1,0 +1,61 @@
+<ion-content class="mascotas-content">
+  
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Mascotas</h2>
+    </div>
+  </header>
+
+  <button class="back-btn" routerLink="/home" title="Volver">
+    <img src="assets/icon/volver.png" alt="Volver">
+  </button>
+
+  <div class="mascotas-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Mascota</span>
+    </h1>
+  </div>
+
+  <!-- boton anadir siempre visible -->
+  <div class="button-container">
+    <ion-button expand="full" class="add-btn" (click)="nuevaMascota()">
+      Añadir Mascota
+    </ion-button>
+  </div>
+
+  <!-- si no hay mascotas -->
+  <div *ngIf="mascotas.length === 0" class="no-mascotas-box">
+    <img src="assets/icon/problema.jpg" class="no-mascotas-icon">
+    <h2>No tienes mascotas registradas</h2>
+    <p>Pulsa el botón de arriba para añadir una nueva mascota.</p>
+  </div>
+
+  <!-- listado si hay mascotas -->
+  <div *ngIf="mascotas.length > 0" class="lista-mascotas">
+
+    <ion-card *ngFor="let m of mascotas" class="card-mascota">
+
+      <ion-img 
+        [src]="m.fotoData || (m.foto ? fotosUrl + m.foto : 'assets/icon/iconoperro.png')"
+        class="mascota-foto">
+      </ion-img>
+
+      <ion-card-content>
+        <h2>{{ m.nombre }}</h2>
+        <p>{{ m.especie }} — {{ m.raza }}</p>
+
+        <ion-button size="small" (click)="verDetalles(m)">
+          Ver más
+        </ion-button>
+        
+        <ion-button size="small" color="success" (click)="irAVacunas(m)">
+          Vacunas
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,161 @@
+@import '../vacunas/vacunas.page.scss';
+
+.home-content {
+  @extend .vacunas-content;
+  padding-bottom: 40px;
+}
+
+.home-header {
+  @extend .vacunas-header;
+  margin-top: 110px;
+}
+
+.logout-btn { @extend .back-btn; } // mismo estilo que el boton de volver
+
+.welcome-box {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+  }
+}
+
+.grid-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 0 10px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px;
+  }
+}
+
+.menu-card {
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  }
+
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+    min-height: 120px;
+    justify-content: center;
+
+    .menu-icon {
+      width: 45px;
+      height: 45px;
+      margin-bottom: 12px;
+      object-fit: contain;
+    }
+
+    .menu-icon-paseos { width: 52px; height: 52px; }
+
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+}
+
+.contact-footer {
+  margin-top: 50px;
+  padding: 30px 20px calc(env(safe-area-inset-bottom) + 30px) 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .footer-content {
+    text-align: center;
+
+    h4 {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 20px 0;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 14px;
+
+        .emoji { font-size: 24px; }
+      }
+    }
+
+    .footer-copyright {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .home-header { margin-top: 85px; }
+  .welcome-box h2 { font-size: 24px; }
+  .grid-menu { gap: 15px; padding: 0 5px; }
+
+  .menu-card ion-card-content {
+    padding: 25px 10px;
+    min-height: 100px;
+    .menu-icon { width: 38px; height: 38px; }
+    .menu-icon-paseos { width: 44px; height: 44px; }
+    h3 { font-size: 16px; }
+  }
+
+  .contact-footer {
+    margin-top: 30px;
+    padding: 20px 15px calc(env(safe-area-inset-bottom) + 20px) 15px;
+
+    .footer-content {
+      h4 { font-size: 18px; margin-bottom: 15px; }
+      .contact-info .contact-item { font-size: 13px; flex-direction: column; gap: 5px; }
+      .footer-copyright { font-size: 11px; }
+    }
+  }
+}

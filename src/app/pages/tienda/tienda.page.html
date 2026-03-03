@@ -1,0 +1,106 @@
+<ion-content class="tienda-content">
+
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Tienda</h2>
+    </div>
+  </header>
+
+  <button class="back-btn" routerLink="/home" title="Volver">
+    <img src="assets/icon/volver.png" alt="Volver">
+  </button>
+
+  <ion-fab slot="fixed" vertical="top" horizontal="end" class="cart-fab">
+    <ion-fab-button class="cart-btn" size="small" (click)="abrirCarrito()">
+      🛒
+    </ion-fab-button>
+    <ion-badge class="cart-badge" *ngIf="cantidadEnCarrito > 0">{{ cantidadEnCarrito }}</ion-badge>
+  </ion-fab>
+
+  <div class="tienda-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Mascota</span>
+    </h1>
+  </div>
+
+  <div class="productos-lista">
+    <ion-card class="producto-card" *ngFor="let p of productos">
+      <img [src]="p.imagen" alt="{{ p.nombre }}" class="producto-img">
+      <ion-card-content>
+        <h2>{{ p.nombre }}</h2>
+        <p>{{ p.descripcion }}</p>
+        <p class="precio">{{ p.precio | currency:'EUR':'symbol':'1.2-2' }}</p>
+
+        <div class="cantidad-box">
+          <span>Cantidad: {{ p.cantidadSeleccionada }}</span>
+          <input
+            type="range"
+            min="1"
+            max="10"
+            step="1"
+            class="native-range"
+            [(ngModel)]="p.cantidadSeleccionada"
+          >
+        </div>
+
+        <ion-button expand="block" class="add-btn" (click)="anadirAlCarrito(p)">
+          Añadir al carrito
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<div class="carrito-overlay" *ngIf="carritoAbierto" (click)="cerrarCarrito()">
+  <div class="carrito-panel" (click)="$event.stopPropagation()">
+    <div class="carrito-panel-header">
+      <h2>Carrito</h2>
+        <ion-button class="carrito-close-btn" size="small" fill="solid" (click)="cerrarCarrito()">
+          Cerrar
+        </ion-button>
+      </div>
+
+    <div class="carrito-panel-body">
+      <div *ngIf="carrito.length === 0" class="carrito-vacio">
+        Tu carrito está vacío.
+      </div>
+
+      <div *ngIf="carrito.length > 0">
+        <ion-card *ngFor="let item of carrito" class="carrito-item">
+          <ion-card-content>
+            <div class="item-top">
+              <img [src]="item.imagen" alt="{{ item.nombre }}" class="item-img">
+              <div>
+                <h3>{{ item.nombre }}</h3>
+                <p>{{ item.precio | currency:'EUR':'symbol':'1.2-2' }}</p>
+              </div>
+            </div>
+
+            <div class="item-actions">
+              <ion-button size="small" fill="outline" (click)="bajarCantidad(item)">-</ion-button>
+              <span>{{ item.cantidad }}</span>
+              <ion-button size="small" fill="outline" (click)="subirCantidad(item)">+</ion-button>
+              <ion-button size="small" color="danger" (click)="eliminarDelCarrito(item.id)">Eliminar</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <div class="resumen">
+          Total: <strong>{{ totalCarrito | currency:'EUR':'symbol':'1.2-2' }}</strong>
+        </div>
+
+        <ion-button expand="block" class="buy-btn" (click)="comprar()">
+          Hacer compra
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="custom-toast" *ngIf="toastAbierto">
+  {{ toastMensaje }}
+</div>
+
+

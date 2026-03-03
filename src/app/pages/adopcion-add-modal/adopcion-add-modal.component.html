@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Publicar en Adopción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <ion-item>
+    <ion-label position="floating">Nombre de la mascota *</ion-label>
+    <ion-input id="adopcion-add-nombre" [(ngModel)]="nombreMascota"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Especie *</ion-label>
+    <ion-input id="adopcion-add-especie" [(ngModel)]="especie" placeholder="Perro, Gato, Conejo..."></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Raza</ion-label>
+    <ion-input id="adopcion-add-raza" [(ngModel)]="raza"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Edad</ion-label>
+    <ion-input id="adopcion-add-edad" [(ngModel)]="edad" placeholder="Ej: 2 años, 6 meses..."></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-input id="adopcion-add-desc" [(ngModel)]="descripcion" placeholder="Carácter, necesidades..."></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Contacto (teléfono o email) *</ion-label>
+    <ion-input id="adopcion-add-contacto" [(ngModel)]="contacto"></ion-input>
+  </ion-item>
+
+  <div class="file-input-wrapper">
+    <ion-item>
+      <ion-label position="stacked">Foto de la mascota</ion-label>
+      <input id="adopcion-add-foto" type="file" (change)="seleccionarFoto($event)" accept="image/*">
+    </ion-item>
+    <p class="file-hint">Selecciona una imagen para la adopción</p>
+  </div>
+
+  <div class="button-box">
+    <ion-button expand="full" class="save-btn" (click)="guardar()">
+      Publicar Adopción
+    </ion-button>
+  </div>
+
+</ion-content>

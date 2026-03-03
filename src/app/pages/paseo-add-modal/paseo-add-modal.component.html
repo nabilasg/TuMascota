@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrar Paseo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <ion-item button (click)="seleccionarMascota()">
+    <ion-label position="stacked">Mascota</ion-label>
+    <ion-note slot="end" *ngIf="!nombreMascota">Pulsa para elegir</ion-note>
+    <ion-text slot="end" *ngIf="nombreMascota">{{ nombreMascota }}</ion-text>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha</ion-label>
+    <ion-input id="paseo-add-fecha" type="date" [(ngModel)]="fecha"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Duración (minutos)</ion-label>
+    <ion-input id="paseo-add-duracion" type="number" [(ngModel)]="duracion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Distancia km (opcional)</ion-label>
+    <ion-input id="paseo-add-distancia" type="number" [(ngModel)]="distancia" step="0.1"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Lugar (opcional)</ion-label>
+    <ion-input id="paseo-add-lugar" type="text" [(ngModel)]="lugar"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Notas (opcional)</ion-label>
+    <ion-input id="paseo-add-notas" type="text" [(ngModel)]="notas"></ion-input>
+  </ion-item>
+
+  <div class="button-box">
+    <ion-button expand="full" class="save-btn" (click)="guardar()">Guardar Paseo</ion-button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles paseo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <ion-item>
+    <ion-label position="stacked">Mascota</ion-label>
+    <ion-input id="paseo-det-mascota" [value]="paseo.mascotaNombre" readonly></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha</ion-label>
+    <ion-input id="paseo-det-fecha" type="date" [(ngModel)]="paseo.fecha" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Duración (minutos)</ion-label>
+    <ion-input id="paseo-det-duracion" type="number" [(ngModel)]="paseo.duracionMinutos" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Distancia (km)</ion-label>
+    <ion-input id="paseo-det-distancia" type="number" [(ngModel)]="paseo.distanciaKm" [readonly]="!editando" step="0.1"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Lugar</ion-label>
+    <ion-input id="paseo-det-lugar" type="text" [(ngModel)]="paseo.lugar" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Notas</ion-label>
+    <ion-input id="paseo-det-notas" type="text" [(ngModel)]="paseo.notas" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <div class="button-box">
+    <ion-button expand="full" color="warning" *ngIf="!editando" (click)="editando = true">Editar</ion-button>
+    <ion-button expand="full" color="success" *ngIf="editando" (click)="guardar()">Guardar Cambios</ion-button>
+    <ion-button expand="full" color="danger" *ngIf="!editando" (click)="eliminar()">Eliminar</ion-button>
+  </div>
+
+</ion-content>

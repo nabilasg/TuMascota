@@ -1,0 +1,7 @@
+{
+  "name": "TuMascota",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

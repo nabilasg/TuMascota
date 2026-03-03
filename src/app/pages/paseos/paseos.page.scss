@@ -1,0 +1,62 @@
+@import '../vacunas/vacunas.page.scss';
+
+.paseos-content { @extend .vacunas-content; }
+.paseos-header { @extend .vacunas-header; }
+.no-paseos-box { @extend .no-vacunas-box; }
+.no-paseos-icon { @extend .no-vacunas-icon; }
+.lista-paseos { @extend .lista-vacunas; }
+.card-paseo { @extend .card-vacuna; }
+
+.stats-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 15px 20px;
+  text-align: center;
+  min-width: 90px;
+
+  .stat-number {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+}
+
+.paseo-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.paseo-fecha {
+  font-size: 13px;
+  color: #999;
+  background: #f5f5f5;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.paseo-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  span { font-size: 14px; color: #666; }
+}

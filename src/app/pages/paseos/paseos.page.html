@@ -1,0 +1,61 @@
+<ion-content class="paseos-content">
+
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Paseos</h2>
+    </div>
+  </header>
+
+  <button class="back-btn" routerLink="/home" title="Volver">
+    <img src="assets/icon/volver.png" alt="Volver">
+  </button>
+
+  <div class="paseos-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Mascota</span>
+    </h1>
+  </div>
+
+  <div class="stats-container" *ngIf="paseos.length > 0">
+    <div class="stat-card">
+      <span class="stat-number">{{ paseos.length }}</span>
+      <span class="stat-label">Paseos</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ totalKm }}</span>
+      <span class="stat-label">Km</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ totalMinutos }}</span>
+      <span class="stat-label">Min</span>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <ion-button expand="full" class="add-btn" (click)="nuevoPaseo()">
+      Registrar paseo
+    </ion-button>
+  </div>
+
+  <div *ngIf="paseos.length === 0 && paseosCargados" class="no-paseos-box">
+    <img src="assets/icon/problema.jpg" class="no-paseos-icon">
+    <h2>No hay paseos registrados</h2>
+    <p>Pulsa el botón de arriba para registrar un nuevo paseo.</p>
+  </div>
+
+  <div *ngIf="paseos.length > 0" class="lista-paseos">
+    <ion-card *ngFor="let p of paseos" class="card-paseo" (click)="verDetalles(p)">
+      <ion-card-content>
+        <div class="paseo-cabecera">
+          <h2>{{ p.mascotaNombre }}</h2>
+          <span class="paseo-fecha">{{ p.fecha }}</span>
+        </div>
+        <p *ngIf="p.duracionMinutos"><strong>Duración:</strong> {{ p.duracionMinutos }} min</p>
+        <p *ngIf="p.distanciaKm"><strong>Distancia:</strong> {{ p.distanciaKm }} km</p>
+        <p *ngIf="p.lugar"><strong>Lugar:</strong> {{ p.lugar }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

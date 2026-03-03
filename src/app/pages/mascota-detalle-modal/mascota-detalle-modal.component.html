@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de Mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <div class="foto-box">
+    <img
+      [src]="getFotoSrc()"
+      class="foto"
+      (click)="ampliarFoto()"
+    >
+    <span class="foto-tip">Toca la foto para ampliar</span>
+  </div>
+
+  <div class="file-input-wrapper" *ngIf="editando">
+    <ion-item>
+      <ion-label position="stacked">Foto de la mascota</ion-label>
+      <input id="mascota-det-foto" type="file" accept="image/*" (change)="seleccionarFoto($event)">
+    </ion-item>
+    <p class="file-hint">Selecciona una imagen para cambiar la foto de tu mascota</p>
+  </div>
+
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input id="mascota-det-nombre" [(ngModel)]="mascota.nombre" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Especie</ion-label>
+    <ion-input id="mascota-det-especie" [(ngModel)]="mascota.especie" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Raza</ion-label>
+    <ion-input id="mascota-det-raza" [(ngModel)]="mascota.raza" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha nacimiento</ion-label>
+    <ion-input id="mascota-det-fecha" type="date" [(ngModel)]="mascota.fechaNacimiento" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <div class="button-box">
+    <ion-button expand="full" color="warning" *ngIf="!editando" (click)="activarEdicion()">
+      Editar
+    </ion-button>
+    <ion-button class="save-edit-btn" expand="full" color="success" *ngIf="editando" (click)="guardarCambios()">
+      Guardar cambios
+    </ion-button>
+    <ion-button expand="full" color="danger" *ngIf="!editando" (click)="eliminarMascota()">
+      Eliminar mascota
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<div class="foto-overlay" *ngIf="fotoAmpliadaSrc" (click)="cerrarFotoAmpliada()">
+  <img [src]="fotoAmpliadaSrc" class="foto-ampliada" (click)="$event.stopPropagation()">
+</div>

@@ -1,0 +1,109 @@
+@import '../vacunas/vacunas.page.scss';
+
+.perfil-content { @extend .vacunas-content; }
+.perfil-header { @extend .vacunas-header; }
+
+.loading-container {
+  text-align: center;
+  padding: 40px 20px;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.perfil-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card,
+.stats-card,
+.acciones-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  ion-card-header {
+    padding: 20px 20px 10px;
+    ion-card-title { font-size: 22px; font-weight: 600; color: #333; }
+  }
+
+  ion-card-content { padding: 20px; }
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:last-child { border-bottom: none; }
+
+  .info-label { font-weight: 600; color: #666; font-size: 14px; }
+  .info-value { color: #333; font-size: 14px; text-align: right; flex: 1; margin-left: 20px; }
+
+  ion-input { --padding-start: 0; --padding-end: 0; margin-top: 5px; }
+  .info-hint { font-size: 12px; color: #999; font-style: italic; display: block; margin-top: 5px; }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 15px;
+
+  .stat-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #f59e0b;
+    margin-bottom: 8px;
+    &.stat-danger { color: #ef4444; }
+  }
+
+  .stat-label { font-size: 14px; color: #666; font-weight: 500; }
+}
+
+.especies-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  .especies-title { font-size: 16px; font-weight: 600; color: #333; margin: 0 0 15px 0; }
+  .especies-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .especie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(245, 158, 11, 0.05);
+    border-radius: 10px;
+    border-left: 3px solid #f59e0b;
+
+    .especie-name { font-size: 14px; color: #333; text-transform: capitalize; }
+    .especie-count {
+      font-weight: 700;
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+  }
+}
+
+.acciones-card {
+  ion-button { font-weight: 600; margin-top: 10px; }
+  .edit-buttons { display: flex; flex-direction: column; gap: 10px; }
+  ion-button[color="danger"] { --background: #ef4444; }
+  ion-button[color="success"] { --background: #10b981; }
+}

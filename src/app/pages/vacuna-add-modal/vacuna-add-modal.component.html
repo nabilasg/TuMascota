@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Añadir Vacuna</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <ion-item button (click)="seleccionarMascota()">
+    <ion-label position="stacked">Mascota</ion-label>
+    <ion-note slot="end" *ngIf="!nombreMascotaSeleccionada">Pulsa para elegir</ion-note>
+    <ion-text slot="end" *ngIf="nombreMascotaSeleccionada">{{ nombreMascotaSeleccionada }}</ion-text>
+  </ion-item>
+
+  <ion-item button (click)="seleccionarVacuna()">
+    <ion-label position="stacked">Vacuna</ion-label>
+    <ion-note slot="end" *ngIf="!nombreVacunaSeleccionada">Pulsa para elegir</ion-note>
+    <ion-text slot="end" *ngIf="nombreVacunaSeleccionada">{{ nombreVacunaSeleccionada }}</ion-text>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha de aplicación</ion-label>
+    <ion-input id="vacuna-add-fecha" type="date" [(ngModel)]="fechaAplicacion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Próxima dosis</ion-label>
+    <ion-input id="vacuna-add-proxima" type="date" [(ngModel)]="fechaProxima"></ion-input>
+  </ion-item>
+
+  <div class="button-box">
+    <ion-button expand="full" class="save-btn" (click)="guardar()">Guardar Vacuna</ion-button>
+  </div>
+
+</ion-content>

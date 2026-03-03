@@ -1,0 +1,90 @@
+<ion-content class="home-content">
+  
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Bienvenido</h2>
+    </div>
+  </header>
+
+  <button class="logout-btn" (click)="cerrarSesion()" title="Cerrar Sesión">
+    <img src="assets/icon/iconosalir.png" alt="Cerrar Sesión">
+  </button>
+
+  <div class="home-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Mascota</span>
+    </h1>
+  </div>
+
+  <div class="welcome-box">
+    <h2>Hola, {{ nombreUsuario || 'Usuario' }}</h2>
+    <p>¿Qué deseas hacer hacer hoy?</p>
+  </div>
+
+  <div class="grid-menu">
+    <ion-card routerLink="/mascotas" class="menu-card">
+      <ion-card-content>
+        <img src="assets/icon/iconoMascota.png" alt="Mascotas" class="menu-icon">
+        <h3>Mascotas</h3>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card (click)="irAVacunas()" class="menu-card">
+      <ion-card-content>
+        <img src="assets/icon/vacuna.png" alt="Vacunas" class="menu-icon">
+        <h3>Vacunas</h3>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card routerLink="/paseos" class="menu-card">
+      <ion-card-content>
+        <img src="assets/icon/paseomascota.png" alt="Paseos" class="menu-icon menu-icon-paseos">
+        <h3>Paseos</h3>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card routerLink="/tienda" class="menu-card">
+      <ion-card-content>
+        <img src="assets/icon/tienda.png" alt="Tienda" class="menu-icon">
+        <h3>Tienda</h3>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card routerLink="/adopciones" class="menu-card">
+      <ion-card-content>
+        <img src="assets/icon/adopcion.png" alt="Adopciones" class="menu-icon">
+        <h3>Adopciones</h3>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card routerLink="/perfil" class="menu-card">
+      <ion-card-content>
+        <img src="assets/icon/verperfil.png" alt="Ver perfil" class="menu-icon">
+        <h3>Ver perfil</h3>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <footer class="contact-footer">
+    <div class="footer-content">
+      <h4>Contacto</h4>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="emoji">📧</span>
+          <span>info@tumascota.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="emoji">📞</span>
+          <span>+34 633 072 374</span>
+        </div>
+        <div class="contact-item">
+          <span class="emoji">📍</span>
+          <span>Calle Francisco Ayala 23, Granada</span>
+        </div>
+      </div>
+      <p class="footer-copyright">© 2026 TuMascota. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</ion-content>

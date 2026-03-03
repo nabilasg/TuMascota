@@ -1,0 +1,46 @@
+<ion-content class="vacunas-content">
+
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Vacunas</h2>
+    </div>
+  </header>
+
+  <button class="back-btn" routerLink="/mascotas" title="Volver">
+    <img src="assets/icon/volver.png" alt="Volver">
+  </button>
+
+  <div class="vacunas-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Mascota</span>
+    </h1>
+  </div>
+
+  <!-- boton anadir siempre visible -->
+  <div class="button-container">
+    <ion-button expand="full" class="add-btn" (click)="nuevaVacuna()">
+      Añadir vacuna
+    </ion-button>
+  </div>
+
+  <!-- si no hay vacunas -->
+  <div *ngIf="vacunas.length === 0" class="no-vacunas-box">
+    <img src="assets/icon/problema.jpg" class="no-vacunas-icon">
+    <h2>No hay vacunas registradas</h2>
+    <p>Pulsa el botón de arriba para añadir una nueva vacuna.</p>
+  </div>
+
+  <!-- listado si hay vacunas -->
+  <div *ngIf="vacunas.length > 0" class="lista-vacunas">
+    <ion-card *ngFor="let v of vacunas" class="card-vacuna" (click)="verDetalles(v)">
+      <ion-card-content>
+        <h2>{{ v.vacunaNombre }}</h2>
+        <p *ngIf="v.mascotaNombre"><strong>Mascota:</strong> {{ v.mascotaNombre }}</p>
+        <p><strong>Aplicada:</strong> {{ v.fechaAplicacion }}</p>
+        <p *ngIf="v.fechaProxima"><strong>Próxima:</strong> {{ v.fechaProxima }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

@@ -1,0 +1,75 @@
+<ion-content class="adopciones-content">
+  
+  <header class="top-header">
+    <div class="header-content">
+      <img src="assets/icon/iconoperro.png" alt="TuMascota" class="header-icon">
+      <h2 class="header-title">Adopciones</h2>
+    </div>
+  </header>
+
+  <button class="back-btn" routerLink="/home" title="Volver">
+    <img src="assets/icon/volver.png" alt="Volver">
+  </button>
+
+  <div class="adopciones-header">
+    <h1 class="app-title">
+      <span class="title-part-1">Tu</span><span class="title-part-2">Mascota</span>
+    </h1>
+  </div>
+
+  <!-- filtros -->
+  <div class="filtros-container">
+    <div class="filtros-btns">
+      <button class="filtro-btn" [class.activo]="filtro === 'todas'" (click)="cambiarFiltro('todas')">
+        Todas
+      </button>
+      <button class="filtro-btn" [class.activo]="filtro === 'mias'" (click)="cambiarFiltro('mias')">
+        Mis publicaciones
+      </button>
+    </div>
+  </div>
+
+  <!-- boton publicar -->
+  <div class="button-container">
+    <ion-button expand="full" class="add-btn" (click)="nuevaAdopcion()">
+      Publicar en Adopción
+    </ion-button>
+  </div>
+
+  <!-- si no hay adopciones -->
+  <div *ngIf="adopciones.length === 0" class="no-adopciones-box">
+    <img src="assets/icon/adopcion.png" class="no-adopciones-icon">
+    <h2 *ngIf="filtro === 'todas'">No hay mascotas en adopción</h2>
+    <h2 *ngIf="filtro === 'mias'">No has publicado ninguna adopción</h2>
+    <p>Pulsa el botón de arriba para publicar una mascota en adopción.</p>
+  </div>
+
+  <!-- listado de adopciones -->
+  <div *ngIf="adopciones.length > 0" class="lista-adopciones">
+
+    <ion-card *ngFor="let a of adopciones" class="card-adopcion" (click)="verDetalle(a)">
+
+      <!-- foto -->
+      <div class="adopcion-foto-container">
+        <img 
+          [src]="a.fotoData || (a.foto ? fotosUrl + a.foto : 'assets/icon/adopcion.png')"
+          class="adopcion-foto"
+          [class.adopcion-foto-default]="!a.foto">
+        <div class="estado-badge" [class.adoptada]="a.estado === 'adoptada'">
+          {{ a.estado === 'disponible' ? 'Disponible' : 'Adoptada' }}
+        </div>
+      </div>
+
+      <ion-card-content>
+        <h2>{{ a.nombreMascota }}</h2>
+        <p><strong>Especie:</strong> {{ a.especie }}</p>
+        <p *ngIf="a.raza"><strong>Raza:</strong> {{ a.raza }}</p>
+        <p *ngIf="a.edad"><strong>Edad:</strong> {{ a.edad }}</p>
+        <p class="publicado-por">Publicado por: {{ a.nombreUsuario }}</p>
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalle Vacuna</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <ion-item>
+    <ion-label position="stacked">Mascota</ion-label>
+    <ion-input id="vacuna-det-mascota" [value]="vacuna.mascotaNombre" readonly></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="!editando">
+    <ion-label position="stacked">Vacuna</ion-label>
+    <ion-input id="vacuna-det-nombre" [(ngModel)]="vacuna.vacunaNombre" readonly></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="editando">
+    <ion-label position="stacked">Vacuna</ion-label>
+    <ion-select
+      id="vacuna-det-select"
+      [(ngModel)]="idVacunaSeleccionada"
+      [compareWith]="compararVacunas"
+      placeholder="Selecciona una vacuna">
+      <ion-select-option *ngFor="let v of vacunasDisponibles" [value]="v.idVacuna">
+        {{ v.nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha Aplicación</ion-label>
+    <ion-input id="vacuna-det-fecha" type="date" [(ngModel)]="vacuna.fechaAplicacion" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Próxima Dosis</ion-label>
+    <ion-input id="vacuna-det-proxima" type="date" [(ngModel)]="vacuna.fechaProxima" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <div class="button-box">
+    <ion-button expand="full" color="warning" *ngIf="!editando" (click)="activarEdicion()">Editar</ion-button>
+    <ion-button expand="full" color="success" *ngIf="editando" (click)="guardar()">Guardar Cambios</ion-button>
+    <ion-button expand="full" color="danger" *ngIf="!editando" (click)="eliminar()">Eliminar</ion-button>
+  </div>
+
+</ion-content>

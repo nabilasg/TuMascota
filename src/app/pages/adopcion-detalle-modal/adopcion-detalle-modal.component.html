@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalle de Adopción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+
+  <!-- foto -->
+  <div class="foto-box">
+    <img
+      [src]="getFotoSrc()"
+      class="foto"
+      (click)="ampliarFoto()"
+    >
+    <span class="foto-tip">Toca la foto para ampliar</span>
+  </div>
+
+  <!-- estado -->
+  <div class="estado-info" [class.adoptada]="adopcion.estado === 'adoptada'">
+    {{ adopcion.estado === 'disponible' ? '🟢 Disponible para adopción' : '🔴 Ya adoptada' }}
+  </div>
+
+  <!-- cambiar foto (solo dueno editando) -->
+  <div class="file-input-wrapper" *ngIf="editando && esMia">
+    <ion-item>
+      <ion-label position="stacked">Cambiar foto</ion-label>
+      <input id="adopcion-det-foto" type="file" accept="image/*" (change)="seleccionarFoto($event)">
+    </ion-item>
+  </div>
+
+  <!-- campos -->
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input id="adopcion-det-nombre" [(ngModel)]="adopcion.nombreMascota" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Especie</ion-label>
+    <ion-input id="adopcion-det-especie" [(ngModel)]="adopcion.especie" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Raza</ion-label>
+    <ion-input id="adopcion-det-raza" [(ngModel)]="adopcion.raza" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Edad</ion-label>
+    <ion-input id="adopcion-det-edad" [(ngModel)]="adopcion.edad" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-input id="adopcion-det-desc" [(ngModel)]="adopcion.descripcion" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Contacto</ion-label>
+    <ion-input id="adopcion-det-contacto" [(ngModel)]="adopcion.contacto" [readonly]="!editando"></ion-input>
+  </ion-item>
+
+  <!-- info del publicador (solo cuando no editas) -->
+  <div class="publicador-info" *ngIf="!editando">
+    <p>Publicado por: <strong>{{ adopcion.nombreUsuario }}</strong></p>
+    <p *ngIf="adopcion.fechaPublicacion">Fecha: {{ adopcion.fechaPublicacion }}</p>
+  </div>
+
+  <!-- botones para el dueno -->
+  <div class="button-box" *ngIf="esMia">
+    <ion-button expand="full" color="warning" *ngIf="!editando" (click)="activarEdicion()">
+      Editar
+    </ion-button>
+    <ion-button expand="full" color="success" *ngIf="editando" (click)="guardarCambios()">
+      Guardar cambios
+    </ion-button>
+    <ion-button expand="full" color="tertiary" *ngIf="!editando && adopcion.estado === 'disponible'" (click)="marcarAdoptada()">
+      Marcar como adoptada
+    </ion-button>
+    <ion-button expand="full" color="danger" *ngIf="!editando" (click)="eliminarAdopcion()">
+      Eliminar publicación
+    </ion-button>
+  </div>
+
+  <!-- contactar (para otros usuarios) -->
+  <div class="contactar-box" *ngIf="!esMia && adopcion.estado === 'disponible'">
+    <h3>¿Te interesa adoptar?</h3>
+    <p>Contacta con el dueño:</p>
+    <a [href]="'tel:' + adopcion.contacto" class="contacto-dato">
+      📞 <strong>{{ adopcion.contacto }}</strong>
+    </a>
+  </div>
+
+</ion-content>
+
+<div class="foto-overlay" *ngIf="fotoAmpliadaSrc" (click)="cerrarFotoAmpliada()">
+  <img [src]="fotoAmpliadaSrc" class="foto-ampliada" (click)="$event.stopPropagation()">
+</div>
